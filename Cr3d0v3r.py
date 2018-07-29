@@ -1,4 +1,4 @@
-#Written by: Karim shoair - D4Vinci ( Cr3dOv3r )j
+#Written by: Karim shoair - D4Vinci ( Cr3dOv3r )
 # -*- coding: utf-8 -*-
 import os,argparse,requests
 from getpass import getpass
@@ -8,12 +8,12 @@ from Core.utils import *
 from Core.color import *
 
 parser = argparse.ArgumentParser(prog='Cr3d0v3r.py')
-parser.add_argument("email", help="Email/username to check")
+parser.add_argument("email", help="list of Email/username to check")
 parser.add_argument("-p",action="store_true", help="Don't check for leaks or plain text passwords.")
 parser.add_argument("-np",action="store_true", help="Don't check for plain text passwords.")
 parser.add_argument("-q",action="store_true", help="Quiet mode (no banner).")
 args    = parser.parse_args()
-email   = args.email
+email_list   = args.email
 
 #with mechanicalsoup
 def login( name ,dic ,email ,pwd ):
@@ -96,14 +96,19 @@ def main():
 		banner()
 	if not args.p:
 		status("Checking email in public leaks...")
-		ispwned.parse_data(email,args.np)
-
+		loop_email = open(email_list,'r').read().splitlines()
+		for email in loop_email:
+			ispwned.parse_data(email,args.np)
 	print(C+" │"+end)
-	line =C+" └──=>Enter a password"+W+"─=> "
+	lines =C+" └──=>Enter List of passwords "+W+"─=> "
 	if os.name=="nt":
-		pwd   = getinput(line) #Escaping the echo warning, sorry guyss (¯\_(ツ)_/¯)
+		loop_pass1 = open(lines,'r').read().splitlines()
+		for line in lines:
+			pwd   = getinput(line) #Escaping the echo warning, sorry guyss (¯\_(ツ)_/¯)
 	else:
-		pwd   = getpass(line)
+		loop_pass2 = open(lines,'r').read().splitlines()
+		for line in lines:
+			pwd   = getpass(line)
 
 	print()
 	status("Testing email against {} website".format( Y+str(len(all_websites))+G ))
