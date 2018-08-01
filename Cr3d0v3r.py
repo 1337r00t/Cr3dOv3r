@@ -113,16 +113,22 @@ def main():
 	print()
 	status("Testing email against {} website".format( Y+str(len(all_websites))+G ))
 	for wd in list(websites.keys()):
-		dic = websites[wd]
-		login( wd ,dic ,email ,pwd )
+		loop_email3 = open(email_list,'r').read().splitlines()
+		for email in loop_email3:
+			dic = websites[wd]
+			login( wd ,dic ,email ,pwd )
 
 	for wd in list(custom_websites.keys()):
-		dic = custom_websites[wd]
-		custom_login( wd ,dic ,email ,pwd )
+		loop_email4 = open(email_list,'r').read().splitlines()
+		for email in loop_email4:
+			dic = custom_websites[wd]
+			custom_login( wd ,dic ,email ,pwd )
 
 	for wd in list(req_websites.keys()):
-		dic = req_websites[wd]
-		req_login( wd ,dic ,email ,pwd )
+		loop_email4 = open(email_list,'r').read().splitlines()
+		for email in loop_email4:
+			dic = req_websites[wd]
+			req_login( wd ,dic ,email ,pwd )
 
 if __name__ == '__main__':
 	main()
