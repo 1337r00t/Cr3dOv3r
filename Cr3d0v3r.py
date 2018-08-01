@@ -95,19 +95,19 @@ def main():
 	if not args.q:
 		banner()
 	if not args.p:
-		status("Checking email in public leaks...")
 		loop_email = open(email_list,'r').read().splitlines()
 		for email in loop_email:
+			status("Checking email ["+C+""+email+""+end+"] in public leaks...")
 			ispwned.parse_data(email,args.np)
 	print(C+" │"+end)
-	lines =C+" └──=>Enter List of passwords "+W+"─=> "
+	lines = raw_input(C+" └──=>Enter List of passwords "+W+"─=> "+end)
 	if os.name=="nt":
 		loop_pass1 = open(lines,'r').read().splitlines()
-		for line in lines:
+		for line in loop_pass1:
 			pwd   = getinput(line) #Escaping the echo warning, sorry guyss (¯\_(ツ)_/¯)
 	else:
 		loop_pass2 = open(lines,'r').read().splitlines()
-		for line in lines:
+		for line in loop_pass2:
 			pwd   = getpass(line)
 
 	print()
